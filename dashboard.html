@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard User - Lereng Green View</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: var(--green-pale); }
+    .dashboard-container { max-width: 1000px; margin: 120px auto 40px; padding: 24px; }
+    .dashboard-card { background: var(--white); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-sm); }
+    .table-responsive { overflow-x: auto; margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    th { background: var(--green-soft); color: var(--text-dark); font-weight: 600; }
+    .badge { padding: 6px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
+    .badge.pending { background: #fff3cd; color: #856404; }
+    .badge.valid { background: #d4edda; color: #155724; }
+    .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .profile-img { width: 60px; height: 60px; border-radius: 50%; background: var(--green-main); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">🌿</div>
+        <div class="brand-text">
+          <span class="brand-name" style="color:var(--text-dark)">Lereng Green View</span>
+        </div>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Kembali ke Beranda</a></li>
+        <li><a href="index.html" class="nav-link btn-login" style="background:#dc3545; color:white;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- DASHBOARD BODY -->
+  <div class="dashboard-container">
+    <div class="dashboard-card">
+      <div class="profile-header">
+        <div class="profile-img"><i class="fas fa-user"></i></div>
+        <div>
+          <h2 style="font-size: 1.5rem; margin-bottom:4px;">Halo, Wisatawan!</h2>
+          <p class="text-mid" style="font-size: 0.9rem; margin:0;">user@example.com</p>
+        </div>
+      </div>
+
+      <h3 style="font-size: 1.2rem; border-bottom: 2px solid var(--green-main); padding-bottom: 8px; display:inline-block;">Riwayat Reservasi Anda</h3>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Booking</th>
+              <th>Paket</th>
+              <th>Tanggal Kunjungan</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>#RSV-001</strong></td>
+              <td>Paket Camping (4 Orang)</td>
+              <td>15 Nov 2026</td>
+              <td>Rp 150.000</td>
+              <td><span class="badge pending">Menunggu Validasi</span></td>
+            </tr>
+            <tr>
+              <td><strong>#RSV-002</strong></td>
+              <td>Outbound</td>
+              <td>10 Nov 2026</td>
+              <td>Rp 200.000</td>
+              <td><span class="badge valid"><i class="fas fa-check"></i> Tiket Terkonfirmasi</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

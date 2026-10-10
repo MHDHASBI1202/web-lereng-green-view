@@ -328,3 +328,66 @@ console.log(
   'color: #2d8a47; font-size: 1.2rem; font-weight: 800;',
   'color: #7a8fa6; font-size: 0.9rem;'
 );
+
+/* =============================================
+   MODAL LOGIC (LOGIN, RESERVASI, PAYMENT)
+   ============================================= */
+const modalOverlay = document.getElementById('modal-overlay');
+const loginModal = document.getElementById('login-modal');
+const bookingModal = document.getElementById('booking-modal');
+const paymentModal = document.getElementById('payment-modal');
+
+function closeModals() {
+  modalOverlay.classList.remove('active');
+  loginModal.classList.remove('active');
+  bookingModal.classList.remove('active');
+  paymentModal.classList.remove('active');
+}
+
+function openLoginModal(e) {
+  if (e) e.preventDefault();
+  closeModals();
+  modalOverlay.classList.add('active');
+  loginModal.classList.add('active');
+}
+
+function openBookingModal(packageName) {
+  closeModals();
+  modalOverlay.classList.add('active');
+  bookingModal.classList.add('active');
+  
+  // Auto-select package if possible
+  const select = document.getElementById('booking-package');
+  for (let i = 0; i < select.options.length; i++) {
+    if (select.options[i].text.includes(packageName)) {
+      select.selectedIndex = i;
+      break;
+    }
+  }
+}
+
+function handleGoogleLogin() {
+  alert('Simulasi: Berhasil Login dengan Google!');
+  closeModals();
+  // Change Login button to User Profile
+  const loginBtn = document.querySelector('.btn-login');
+  if (loginBtn) {
+    loginBtn.innerHTML = '<i class="fas fa-user-check"></i> Akun Saya';
+    loginBtn.setAttribute('onclick', 'window.location.href="dashboard.html"');
+  }
+}
+
+function handleBookingSubmit(e) {
+  e.preventDefault();
+  closeModals();
+  // Show Payment Modal
+  modalOverlay.classList.add('active');
+  paymentModal.classList.add('active');
+}
+
+function handlePaymentSubmit(e) {
+  e.preventDefault();
+  closeModals();
+  alert('Pembayaran berhasil diunggah! Menunggu validasi admin.');
+  window.location.href = 'dashboard.html';
+}

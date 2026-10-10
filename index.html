@@ -41,6 +41,7 @@
         <li><a href="#galeri" class="nav-link">Galeri</a></li>
         <li><a href="#lokasi" class="nav-link">Lokasi</a></li>
         <li><a href="#kontak" class="nav-link btn-nav">Hubungi Kami</a></li>
+        <li><a href="#" class="nav-link btn-login" onclick="openLoginModal(event)"><i class="fas fa-user-circle"></i> Login</a></li>
       </ul>
     </div>
   </nav>
@@ -172,10 +173,11 @@
           <div class="card-body">
             <h3>Trekking Alam</h3>
             <p>Jelajahi jalur trekking yang indah di antara pepohonan hijau dengan pemandangan danau dan pegunungan yang memukau.</p>
-            <div class="card-meta">
+            <div class="card-meta" style="margin-bottom: 16px;">
               <span><i class="fas fa-clock"></i> 2–4 jam</span>
               <span><i class="fas fa-users"></i> Semua usia</span>
             </div>
+            <button class="btn btn-primary btn-full" onclick="openBookingModal('Trekking Alam')">Reservasi</button>
           </div>
         </div>
 
@@ -189,10 +191,11 @@
           <div class="card-body">
             <h3>Berkemah</h3>
             <p>Seru berkemah bersama keluarga dan teman di camping ground yang asri, lengkap dengan api unggun dan suasana bintang malam.</p>
-            <div class="card-meta">
+            <div class="card-meta" style="margin-bottom: 16px;">
               <span><i class="fas fa-clock"></i> Malam hari</span>
               <span><i class="fas fa-users"></i> Keluarga</span>
             </div>
+            <button class="btn btn-primary btn-full" onclick="openBookingModal('Berkemah')">Reservasi</button>
           </div>
         </div>
 
@@ -205,11 +208,12 @@
           </div>
           <div class="card-body">
             <h3>Outbound & Playground</h3>
-            <p>Area bermain dan outbound yang seru untuk anak-anak dan dewasa — flying fox, jembatan tali, hingga permainan kelompok yang mengasyikkan.</p>
-            <div class="card-meta">
+            <p>Area bermain dan outbound yang seru untuk anak-anak dan dewasa — flying fox, jembatan tali, hingga permainan kelompok.</p>
+            <div class="card-meta" style="margin-bottom: 16px;">
               <span><i class="fas fa-clock"></i> Fleksibel</span>
               <span><i class="fas fa-users"></i> Anak & dewasa</span>
             </div>
+            <button class="btn btn-primary btn-full" onclick="openBookingModal('Outbound')">Reservasi</button>
           </div>
         </div>
 
@@ -223,10 +227,11 @@
           <div class="card-body">
             <h3>Agrowisata</h3>
             <p>Petik buah dan sayur segar langsung dari kebun. Rasakan pengalaman bertani yang menyenangkan bersama si kecil.</p>
-            <div class="card-meta">
+            <div class="card-meta" style="margin-bottom: 16px;">
               <span><i class="fas fa-clock"></i> Pagi–sore</span>
               <span><i class="fas fa-users"></i> Keluarga</span>
             </div>
+            <button class="btn btn-primary btn-full" onclick="openBookingModal('Agrowisata')">Reservasi</button>
           </div>
         </div>
 
@@ -240,10 +245,11 @@
           <div class="card-body">
             <h3>Paralayang</h3>
             <p>Rasakan sensasi terbang di atas Danau Singkarak dari lokasi peluncuran paralayang dengan pemandangan yang spektakuler.</p>
-            <div class="card-meta">
+            <div class="card-meta" style="margin-bottom: 16px;">
               <span><i class="fas fa-clock"></i> Per sesi</span>
               <span><i class="fas fa-users"></i> Dewasa</span>
             </div>
+            <button class="btn btn-primary btn-full" onclick="openBookingModal('Paralayang')">Reservasi</button>
           </div>
         </div>
 
@@ -591,6 +597,94 @@
   <button class="back-to-top" id="back-to-top" aria-label="Kembali ke atas">
     <i class="fas fa-chevron-up"></i>
   </button>
+
+  <!-- ===== MODALS ===== -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModals()"></div>
+
+  <!-- Login Modal -->
+  <div class="modal" id="login-modal">
+    <div class="modal-header">
+      <h3>Login / Daftar</h3>
+      <button class="close-modal" onclick="closeModals()">&times;</button>
+    </div>
+    <div class="modal-body" style="text-align: center;">
+      <p style="margin-bottom: 24px; color: var(--text-mid);">Masuk untuk memesan paket wisata dan melihat riwayat reservasi Anda.</p>
+      <button class="btn btn-primary btn-full" onclick="handleGoogleLogin()" style="background: #fff; color: #333; border: 1px solid #ccc; font-weight: 500;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" width="20" style="display:inline; margin-right:8px;"> Lanjutkan dengan Google
+      </button>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal" id="booking-modal">
+    <div class="modal-header">
+      <h3>Reservasi Paket Wisata</h3>
+      <button class="close-modal" onclick="closeModals()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="booking-form" onsubmit="handleBookingSubmit(event)">
+        <div class="form-group">
+          <label>Paket Pilihan</label>
+          <select id="booking-package" required>
+            <option value="" disabled selected>Pilih paket...</option>
+            <option value="camping">Paket Camping</option>
+            <option value="outbound">Paket Outbound</option>
+            <option value="paralayang">Paralayang</option>
+            <option value="gathering">Family Gathering / BBQ</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tanggal Kunjungan</label>
+            <input type="date" required>
+          </div>
+          <div class="form-group">
+            <label>Jumlah Peserta</label>
+            <input type="number" min="1" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" placeholder="Masukkan nama Anda" required>
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp</label>
+          <input type="tel" placeholder="08xxxxxxxxx" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top: 16px;">Lanjutkan ke Pembayaran</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="modal" id="payment-modal">
+    <div class="modal-header">
+      <h3>Pembayaran</h3>
+      <button class="close-modal" onclick="closeModals()">&times;</button>
+    </div>
+    <div class="modal-body" style="text-align: center;">
+      <h4 style="font-size: 1.5rem; margin-bottom: 8px;">Total: <strong>Rp 150.000</strong></h4>
+      <p style="color: var(--text-mid); margin-bottom: 24px; font-size: 0.9rem;">Silakan scan QRIS atau transfer ke rekening di bawah ini.</p>
+      
+      <div style="margin-bottom: 24px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="QRIS" width="160" style="margin: 0 auto; display: block; border-radius: 8px; border: 1px solid var(--border);">
+      </div>
+      
+      <div style="background: var(--green-soft); border-radius: var(--radius-sm); padding: 16px; text-align: left; margin-bottom: 24px;">
+        <p style="margin-bottom: 4px; color: var(--text-dark);"><strong>Bank Nagari</strong></p>
+        <p style="margin-bottom: 4px; font-size: 1.2rem; font-weight: 700;">1234-5678-9012</p>
+        <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--text-mid);">a.n Lereng Green View</p>
+      </div>
+
+      <form onsubmit="handlePaymentSubmit(event)" style="text-align: left;">
+        <div class="form-group">
+          <label>Upload Bukti Pembayaran</label>
+          <input type="file" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top: 16px;">Konfirmasi Pembayaran</button>
+      </form>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

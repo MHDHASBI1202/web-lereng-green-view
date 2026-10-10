@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Lereng Green View</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #f4f6f8; }
+    .admin-container { display: flex; min-height: 100vh; }
+    .sidebar { width: 260px; background: var(--text-dark); color: white; padding: 24px; display: flex; flex-direction: column; }
+    .sidebar .brand { margin-bottom: 40px; color:white; }
+    .sidebar-menu { list-style: none; padding: 0; margin: 0; display:flex; flex-direction: column; gap:12px; }
+    .sidebar-menu li a { display: block; padding: 12px 16px; border-radius: 8px; color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+    .sidebar-menu li a:hover, .sidebar-menu li a.active { background: rgba(255,255,255,0.1); color: white; }
+    
+    .main-content { flex: 1; padding: 40px; }
+    .admin-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .table-responsive { overflow-x: auto; margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; min-width: 800px; }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #eaeaea; font-size: 0.85rem; }
+    th { background: #f8f9fa; color: #333; font-weight: 600; }
+    
+    .badge { padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
+    .badge.pending { background: #fff3cd; color: #856404; }
+    .badge.valid { background: #d4edda; color: #155724; }
+    
+    .action-btn { background: var(--green-main); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+    .action-btn.reject { background: #dc3545; }
+    .action-btn:hover { opacity: 0.9; }
+    .receipt-link { color: #007bff; text-decoration: underline; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div class="admin-container">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="brand">
+        <h2 style="font-size:1.2rem; margin:0;"><i class="fas fa-leaf" style="color:var(--green-light)"></i> Admin Panel</h2>
+        <p style="font-size:0.75rem; opacity:0.6; margin:0;">Lereng Green View</p>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="#" class="active"><i class="fas fa-ticket-alt"></i> Validasi Reservasi</a></li>
+        <li><a href="#"><i class="fas fa-box"></i> Kelola Paket Wisata</a></li>
+        <li><a href="#"><i class="fas fa-users"></i> Data Pengguna</a></li>
+        <li style="margin-top:auto;"><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <h2 style="margin-bottom: 24px;">Daftar Reservasi & Pembayaran</h2>
+      
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Pemesan</th>
+                <th>Paket</th>
+                <th>Tanggal</th>
+                <th>Total Bayar</th>
+                <th>Bukti Transfer</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#RSV-001</strong></td>
+                <td>Budi Santoso<br><small>08123456789</small></td>
+                <td>Paket Camping<br><small>4 Orang</small></td>
+                <td>15 Nov 2026</td>
+                <td>Rp 150.000</td>
+                <td><span class="receipt-link" onclick="alert('Membuka gambar bukti transfer...')"><i class="fas fa-image"></i> Lihat Foto</span></td>
+                <td><span class="badge pending">Menunggu Validasi</span></td>
+                <td>
+                  <button class="action-btn" onclick="alert('Reservasi divalidasi!')"><i class="fas fa-check"></i> Validasi</button>
+                  <button class="action-btn reject" onclick="alert('Reservasi ditolak!')"><i class="fas fa-times"></i> Tolak</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>#RSV-002</strong></td>
+                <td>Siti Aminah<br><small>08987654321</small></td>
+                <td>Outbound<br><small>10 Orang</small></td>
+                <td>10 Nov 2026</td>
+                <td>Rp 200.000</td>
+                <td><span class="receipt-link"><i class="fas fa-image"></i> Lihat Foto</span></td>
+                <td><span class="badge valid">Divalidasi</span></td>
+                <td>
+                  <span style="color:var(--text-mid); font-size:0.8rem;"><i class="fas fa-check-circle"></i> Selesai</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
