@@ -11,12 +11,17 @@
 <body class="admin-page">
   <div class="admin-shell">
     <aside class="admin-sidebar">
-      <div class="brand">
-        <div class="brand-icon">🌿</div>
-        <div class="brand-text">
-          <span class="brand-name">Admin Panel</span>
-          <span class="brand-sub">Lereng Green View</span>
+      <div class="admin-sidebar-header">
+        <div class="brand">
+          <div class="brand-icon">🌿</div>
+          <div class="brand-text">
+            <span class="brand-name">Admin Panel</span>
+            <span class="brand-sub">Lereng Green View</span>
+          </div>
         </div>
+        <button type="button" id="admin-sidebar-toggle" class="admin-sidebar-toggle" aria-label="Tutup sidebar" title="Tutup sidebar">
+          <i class="fas fa-chevron-left"></i>
+        </button>
       </div>
 
       <nav class="admin-menu" aria-label="Menu admin">
@@ -44,6 +49,10 @@
     </aside>
 
     <main class="admin-main">
+      <button type="button" id="admin-sidebar-open-mobile" class="admin-mobile-sidebar-open" aria-label="Buka sidebar" title="Buka sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+
       <header class="admin-topbar">
         <div>
           <p>Dashboard Admin</p>

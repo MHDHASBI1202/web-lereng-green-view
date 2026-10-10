@@ -584,13 +584,6 @@ function clearAdminSession() {
   });
 }
 
-// function logoutAdmin() {
-//   clearAdminSession();
-//   window.location.replace('admin-login.html');
-// }
-
-// window.logoutAdmin = logoutAdmin;
-
 function setupLogoutButton() {
   const logoutBtn = document.getElementById('logout-admin-btn');
 
@@ -1051,30 +1044,6 @@ function getPackages() {
     return [];
   }
 }
-
-// async function loadPackagesData() {
-//   if (hasSupabaseConfig()) {
-//     try {
-//       const { data, error } = await supabase
-//         .from('packages')
-//         .select('*')
-//         .order('created_at', { ascending: false });
-
-//       if (!error && Array.isArray(data) && data.length > 0) {
-//         localStorage.setItem(PACKAGES_STORAGE_KEY, JSON.stringify(data));
-//         return data;
-//       }
-
-//       if (error) {
-//         console.warn('Supabase packages query failed:', error.message);
-//       }
-//     } catch (error) {
-//       console.warn('Supabase packages unavailable:', error);
-//     }
-//   }
-
-//   return getPackages();
-// }
 
 async function loadPackagesData(options = { includeInactive: false }) {
   const client = window.supabaseClient || (await ensureSupabaseRuntime() ? window.supabaseClient : null);
@@ -1858,37 +1827,6 @@ document.addEventListener('DOMContentLoaded', () => {
   hydrateGuestAuthState();
 });
 
-// async function loadReservationsData() {
-//   if (hasSupabaseConfig()) {
-//     try {
-//       const { data, error } = await supabase
-//         .from('reservations')
-//         .select('*, packages(name, price, image_url), users(name, username, phone_number)')
-//         .order('created_at', { ascending: false });
-
-//       if (!error && Array.isArray(data)) {
-//         localStorage.setItem(RESERVATIONS_STORAGE_KEY, JSON.stringify(data));
-//         return data;
-//       }
-
-//       if (error) {
-//         console.warn('Reservasi gagal dimuat dari Supabase:', error.message);
-//       }
-//     } catch (error) {
-//       console.warn('Supabase reservasi tidak tersedia:', error);
-//     }
-//   }
-
-//   try {
-//     const saved = JSON.parse(localStorage.getItem(RESERVATIONS_STORAGE_KEY) || '[]');
-//     if (Array.isArray(saved)) return saved;
-//   } catch (error) {
-//     console.warn('Gagal membaca reservasi lokal:', error);
-//   }
-
-//   return [];
-// }
-
 async function loadReservationsData(options = {}) {
   const client = window.supabaseClient;
   const rawUserId = options.userId ?? options.userDbId;
@@ -2122,30 +2060,6 @@ async function renderAdminReservationTable() {
     });
   });
 }
-
-// async function loadUsersData() {
-//   if (hasSupabaseConfig()) {
-//     try {
-//       const { data, error } = await supabase
-//         .from('users')
-//         .select('*')
-//         .order('created_at', { ascending: false });
-
-//       if (!error && Array.isArray(data)) {
-//         localStorage.setItem(ADMIN_USERS_KEY, JSON.stringify(data));
-//         return data;
-//       }
-
-//       if (error) {
-//         console.warn('Users gagal dimuat dari Supabase:', error.message);
-//       }
-//     } catch (error) {
-//       console.warn('Supabase users tidak tersedia:', error);
-//     }
-//   }
-
-//   return getAdminUsers();
-// }
 
 async function loadUsersData() {
   const client = window.supabaseClient;
@@ -2600,35 +2514,6 @@ function setupAdminNavigation() {
   });
 }
 
-// async function loginAdminToSupabase(username, password) {
-//   if (!hasSupabaseConfig()) {
-//     const users = getAdminUsers();
-//     const matchedUser = users.find((user) => user.username === username && user.password === password);
-//     if (!matchedUser) return null;
-//     return matchedUser;
-//   }
-
-//   try {
-//     const { data, error } = await supabase
-//       .from('users')
-//       .select('*')
-//       .eq('username', username)
-//       .eq('role', 'admin')
-//       .maybeSingle();
-
-//     if (error) {
-//       throw error;
-//     }
-
-//     if (!data) return null;
-//     if (String(data.password) !== String(password)) return null;
-//     return data;
-//   } catch (error) {
-//     console.warn('Login admin via Supabase gagal:', error.message || error);
-//     return null;
-//   }
-// }
-
 async function loginAdminToSupabase(username, password) {
   const client = window.supabaseClient;
 
@@ -2832,6 +2717,61 @@ function initAdminPage() {
     if (adminName && session) {
       adminName.textContent = session.name || session.username;
     }
+
+    const sidebarToggleBtn = document.getElementById('admin-sidebar-toggle');
+    const mobileSidebarOpenBtn = document.getElementById('admin-sidebar-open-mobile');
+
+    const syncSidebarState = () => {
+      const collapsed = document.body.classList.contains('admin-sidebar-collapsed');
+      if (sidebarToggleBtn) {
+        sidebarToggleBtn.setAttribute('aria-label', collapsed ? 'Buka sidebar' : 'Tutup sidebar');
+        sidebarToggleBtn.setAttribute('title', collapsed ? 'Buka sidebar' : 'Tutup sidebar');
+      }
+      if (mobileSidebarOpenBtn) {
+        mobileSidebarOpenBtn.setAttribute('aria-label', collapsed ? 'Buka sidebar' : 'Tutup sidebar');
+        mobileSidebarOpenBtn.setAttribute('title', collapsed ? 'Buka sidebar' : 'Tutup sidebar');
+      }
+    };
+
+    const toggleSidebar = () => {
+      const isMobile = window.matchMedia('(max-width: 899px)').matches;
+      if (!isMobile) return;
+      const isCollapsed = document.body.classList.toggle('admin-sidebar-collapsed');
+      syncSidebarState();
+      if (isCollapsed) {
+        sidebarToggleBtn && sidebarToggleBtn.setAttribute('aria-expanded', 'false');
+        mobileSidebarOpenBtn && mobileSidebarOpenBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        sidebarToggleBtn && sidebarToggleBtn.setAttribute('aria-expanded', 'true');
+        mobileSidebarOpenBtn && mobileSidebarOpenBtn.setAttribute('aria-expanded', 'true');
+      }
+    };
+
+    if (sidebarToggleBtn) {
+      sidebarToggleBtn.addEventListener('click', toggleSidebar);
+      sidebarToggleBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    if (mobileSidebarOpenBtn) {
+      mobileSidebarOpenBtn.addEventListener('click', () => {
+        document.body.classList.remove('admin-sidebar-collapsed');
+        syncSidebarState();
+        if (sidebarToggleBtn) {
+          sidebarToggleBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      mobileSidebarOpenBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    window.addEventListener('resize', () => {
+      const isMobile = window.matchMedia('(max-width: 899px)').matches;
+      if (!isMobile) {
+        document.body.classList.remove('admin-sidebar-collapsed');
+      }
+      syncSidebarState();
+    });
+
+    syncSidebarState();
 
     const logoutBtn = document.getElementById('logout-admin-btn');
     if (logoutBtn) {
