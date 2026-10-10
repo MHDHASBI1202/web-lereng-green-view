@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Admin - Lereng Green View</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="admin-auth-page">
+    <div class="admin-auth-card">
+        <a href="index.html" class="brand" aria-label="Kembali ke halaman utama">
+            <div class="brand-icon">🌿</div>
+            <div class="brand-text">
+                <span class="brand-name">Lereng Green View</span>
+                <span class="brand-sub">Admin Area</span>
+            </div>
+        </a>
+
+        <h2>Login Admin</h2>
+        <p>Masuk menggunakan username dan password untuk mengelola sistem.</p>
+
+        <form id="admin-login-form" class="admin-form">
+            <div class="admin-form-group">
+                <label for="admin-username">Username</label>
+                <input id="admin-username" type="text" placeholder="Masukkan username" required />
+            </div>
+
+            <div class="admin-form-group">
+                <label for="admin-password">Password</label>
+                <div style="position: relative;">
+                    <input id="admin-password" type="password" placeholder="Masukkan password" required style="padding-right: 42px;" />
+                    <button type="button" class="password-toggle-btn" data-target="admin-password" aria-label="Lihat password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #4a5568; cursor: pointer; font-size: 1rem;">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+                <i class="fas fa-sign-in-alt"></i> Masuk ke Admin
+            </button>
+        </form>
+
+        <div class="admin-helper">
+            Demo login: <strong>admin</strong> / <strong>admin123</strong>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

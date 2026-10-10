@@ -1,0 +1,39 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Ganti ke master jika branch utama kamu master
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Generate config.js from GitHub Secrets
+        run: |
+          cat <<EOF > config.js
+          window.LGV_CONFIG = {
+            supabaseUrl: '${{ secrets.SUPABASE_URL }}',
+            supabaseAnonKey: '${{ secrets.SUPABASE_ANON_KEY }}',
+            storageBucket: 'package-images'
+          };
+
+          if (window.supabase) {
+            window.supabaseClient = window.supabase.createClient(
+              window.LGV_CONFIG.supabaseUrl,
+              window.LGV_CONFIG.supabaseAnonKey
+            );
+          }
+          EOF
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./

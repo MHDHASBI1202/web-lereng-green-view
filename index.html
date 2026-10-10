@@ -64,7 +64,7 @@
       </p>
       <div class="hero-stats">
         <div class="stat">
-          <span class="stat-num">4+</span>
+          <span class="stat-num">0</span>
           <span class="stat-label">Aktivitas Seru</span>
         </div>
         <div class="stat-divider"></div>
@@ -623,6 +623,7 @@
     </div>
     <div class="modal-body">
       <form id="booking-form" onsubmit="handleBookingSubmit(event)">
+        <input type="hidden" id="booking-package-id" />
         <div class="form-group">
           <label>Paket Pilihan</label>
           <select id="booking-package" required>
@@ -636,20 +637,20 @@
         <div class="form-row">
           <div class="form-group">
             <label>Tanggal Kunjungan</label>
-            <input type="date" required>
+            <input id="booking-date" type="date" required>
           </div>
           <div class="form-group">
             <label>Jumlah Peserta</label>
-            <input type="number" min="1" required>
+            <input id="booking-participants" type="number" min="1" required>
           </div>
         </div>
         <div class="form-group">
           <label>Nama Lengkap</label>
-          <input type="text" placeholder="Masukkan nama Anda" required>
+          <input id="booking-name" type="text" placeholder="Masukkan nama Anda" required>
         </div>
         <div class="form-group">
           <label>Nomor WhatsApp</label>
-          <input type="tel" placeholder="08xxxxxxxxx" required>
+          <input id="booking-whatsapp" type="tel" placeholder="08xxxxxxxxx" required>
         </div>
         <button type="submit" class="btn btn-primary btn-full" style="margin-top: 16px;">Lanjutkan ke Pembayaran</button>
       </form>
@@ -663,7 +664,7 @@
       <button class="close-modal" onclick="closeModals()">&times;</button>
     </div>
     <div class="modal-body" style="text-align: center;">
-      <h4 style="font-size: 1.5rem; margin-bottom: 8px;">Total: <strong>Rp 150.000</strong></h4>
+      <h4 style="font-size: 1.5rem; margin-bottom: 8px;">Total: <strong id="payment-total-amount">Rp 150.000</strong></h4>
       <p style="color: var(--text-mid); margin-bottom: 24px; font-size: 0.9rem;">Silakan scan QRIS atau transfer ke rekening di bawah ini.</p>
       
       <div style="margin-bottom: 24px;">
@@ -676,16 +677,17 @@
         <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--text-mid);">a.n Lereng Green View</p>
       </div>
 
-      <form onsubmit="handlePaymentSubmit(event)" style="text-align: left;">
+      <form id="payment-form" onsubmit="handlePaymentSubmit(event)" style="text-align: left;">
         <div class="form-group">
           <label>Upload Bukti Pembayaran</label>
-          <input type="file" accept="image/*" required>
+          <input id="payment-proof-file" type="file" accept="image/*" required>
         </div>
         <button type="submit" class="btn btn-primary btn-full" style="margin-top: 16px;">Konfirmasi Pembayaran</button>
       </form>
     </div>
   </div>
 
+  <script src="supabase-config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

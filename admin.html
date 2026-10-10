@@ -1,106 +1,247 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel - Lereng Green View</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body { background: #f4f6f8; }
-    .admin-container { display: flex; min-height: 100vh; }
-    .sidebar { width: 260px; background: var(--text-dark); color: white; padding: 24px; display: flex; flex-direction: column; }
-    .sidebar .brand { margin-bottom: 40px; color:white; }
-    .sidebar-menu { list-style: none; padding: 0; margin: 0; display:flex; flex-direction: column; gap:12px; }
-    .sidebar-menu li a { display: block; padding: 12px 16px; border-radius: 8px; color: rgba(255,255,255,0.7); font-size: 0.9rem; }
-    .sidebar-menu li a:hover, .sidebar-menu li a.active { background: rgba(255,255,255,0.1); color: white; }
-    
-    .main-content { flex: 1; padding: 40px; }
-    .admin-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    .table-responsive { overflow-x: auto; margin-top: 20px; }
-    table { width: 100%; border-collapse: collapse; min-width: 800px; }
-    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #eaeaea; font-size: 0.85rem; }
-    th { background: #f8f9fa; color: #333; font-weight: 600; }
-    
-    .badge { padding: 4px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
-    .badge.pending { background: #fff3cd; color: #856404; }
-    .badge.valid { background: #d4edda; color: #155724; }
-    
-    .action-btn { background: var(--green-main); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
-    .action-btn.reject { background: #dc3545; }
-    .action-btn:hover { opacity: 0.9; }
-    .receipt-link { color: #007bff; text-decoration: underline; cursor: pointer; }
-  </style>
 </head>
-<body>
-
-  <div class="admin-container">
-    <!-- SIDEBAR -->
-    <div class="sidebar">
+<body class="admin-page">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
       <div class="brand">
-        <h2 style="font-size:1.2rem; margin:0;"><i class="fas fa-leaf" style="color:var(--green-light)"></i> Admin Panel</h2>
-        <p style="font-size:0.75rem; opacity:0.6; margin:0;">Lereng Green View</p>
-      </div>
-      <ul class="sidebar-menu">
-        <li><a href="#" class="active"><i class="fas fa-ticket-alt"></i> Validasi Reservasi</a></li>
-        <li><a href="#"><i class="fas fa-box"></i> Kelola Paket Wisata</a></li>
-        <li><a href="#"><i class="fas fa-users"></i> Data Pengguna</a></li>
-        <li style="margin-top:auto;"><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-      </ul>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-      <h2 style="margin-bottom: 24px;">Daftar Reservasi & Pembayaran</h2>
-      
-      <div class="admin-card">
-        <div class="table-responsive">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Pemesan</th>
-                <th>Paket</th>
-                <th>Tanggal</th>
-                <th>Total Bayar</th>
-                <th>Bukti Transfer</th>
-                <th>Status</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>#RSV-001</strong></td>
-                <td>Budi Santoso<br><small>08123456789</small></td>
-                <td>Paket Camping<br><small>4 Orang</small></td>
-                <td>15 Nov 2026</td>
-                <td>Rp 150.000</td>
-                <td><span class="receipt-link" onclick="alert('Membuka gambar bukti transfer...')"><i class="fas fa-image"></i> Lihat Foto</span></td>
-                <td><span class="badge pending">Menunggu Validasi</span></td>
-                <td>
-                  <button class="action-btn" onclick="alert('Reservasi divalidasi!')"><i class="fas fa-check"></i> Validasi</button>
-                  <button class="action-btn reject" onclick="alert('Reservasi ditolak!')"><i class="fas fa-times"></i> Tolak</button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>#RSV-002</strong></td>
-                <td>Siti Aminah<br><small>08987654321</small></td>
-                <td>Outbound<br><small>10 Orang</small></td>
-                <td>10 Nov 2026</td>
-                <td>Rp 200.000</td>
-                <td><span class="receipt-link"><i class="fas fa-image"></i> Lihat Foto</span></td>
-                <td><span class="badge valid">Divalidasi</span></td>
-                <td>
-                  <span style="color:var(--text-mid); font-size:0.8rem;"><i class="fas fa-check-circle"></i> Selesai</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="brand-icon">🌿</div>
+        <div class="brand-text">
+          <span class="brand-name">Admin Panel</span>
+          <span class="brand-sub">Lereng Green View</span>
         </div>
       </div>
-    </div>
+
+      <nav class="admin-menu" aria-label="Menu admin">
+        <button type="button" class="admin-menu-item active" data-admin-panel="panel-validasi">
+          <i class="fas fa-ticket-alt"></i> Validasi Reservasi
+        </button>
+        <button type="button" class="admin-menu-item" data-admin-panel="panel-users">
+          <i class="fas fa-users"></i> Data Pengguna
+        </button>
+        <button type="button" class="admin-menu-item" data-admin-panel="panel-packages">
+          <i class="fas fa-box"></i> Kelola Paket Wisata
+        </button>
+        <button type="button" class="admin-menu-item" data-admin-panel="panel-reset-password">
+          <i class="fas fa-key"></i> Reset Password
+        </button>
+      </nav>
+
+      <!-- <button type="button" id="logout-admin-btn" class="btn btn-danger btn-full" onclick="logoutAdmin()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button> -->
+
+      <button type="button" id="logout-admin-btn" class="btn btn-danger btn-full">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <p>Dashboard Admin</p>
+          <h1>Reservasi & Paket Wisata</h1>
+        </div>
+        <div class="admin-header-actions">
+          <button type="button" id="admin-reset-password-btn" class="btn btn-outline btn-small">
+            <i class="fas fa-key"></i> Reset Password
+          </button>
+          <div class="admin-user-badge">
+            <i class="fas fa-user-shield"></i>
+            <span id="admin-profile-name">Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <section id="panel-validasi" class="admin-panel active">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h3>Daftar Reservasi & Pembayaran</h3>
+              <p>Validasi bukti transfer pelanggan dan kelola status reservasi.</p>
+            </div>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Pemesan</th>
+                  <th>Paket</th>
+                  <th>Tanggal</th>
+                  <th>Total Bayar</th>
+                  <th>Bukti Transfer</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="admin-reservations-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-users" class="admin-panel">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h3>Data Pengguna</h3>
+              <p>Kelola pengguna yang terdaftar di sistem dan lihat role aktif mereka.</p>
+            </div>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>No. WA</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-users-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-packages" class="admin-panel">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h3>Kelola Paket Wisata</h3>
+              <p>Tambah paket wisata baru dan sertakan gambar untuk tiap paket.</p>
+            </div>
+          </div>
+
+          <form id="package-form" class="package-form">
+            <div class="form-group">
+              <label for="package-name">Nama Paket</label>
+              <input id="package-name" type="text" placeholder="Contoh: Berkemah" required />
+            </div>
+
+            <!-- Dropdown Kategori -->
+            <div class="form-group">
+              <label for="package-category">Kategori</label>
+              <select id="package-category" required>
+                <option value="">-- Pilih Kategori --</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label for="package-description">Deskripsi</label>
+              <textarea id="package-description" placeholder="Tuliskan deskripsi paket wisata..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="package-price">Harga (Rp)</label>
+              <input id="package-price" type="number" min="0" placeholder="150000" required />
+            </div>
+
+            <!-- Dropdown Durasi -->
+            <div class="form-group">
+              <label for="package-duration">Durasi</label>
+              <select id="package-duration" required>
+                <option value="">-- Pilih Durasi --</option>
+              </select>
+            </div>
+
+            <!-- Dropdown Target Usia -->
+            <div class="form-group">
+              <label for="package-target-age">Target Usia</label>
+              <select id="package-target-age" required>
+                <option value="">-- Pilih Target Usia --</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="package-image">Gambar Paket</label>
+              <input id="package-image" type="file" accept="image/*" />
+            </div>
+
+            <div class="full" style="display:flex; justify-content:flex-end;">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Tambah Paket
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h3>Daftar Paket Wisata</h3>
+              <p>Semua paket yang aktif dapat dipilih oleh pengunjung untuk reservasi.</p>
+            </div>
+          </div>
+
+          <div id="admin-package-list" class="package-list"></div>
+        </div>
+      </section>
+
+      <section id="panel-reset-password" class="admin-panel">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <h3>Reset Password Admin</h3>
+              <p>Ubah password akun admin dengan validasi password lama dan konfirmasi password baru.</p>
+            </div>
+          </div>
+
+          <form id="admin-reset-password-form" class="package-form">
+            <div class="form-group">
+              <label for="admin-old-password">Password Lama</label>
+              <div style="position: relative;">
+                <input id="admin-old-password" type="password" placeholder="Masukkan password lama" required style="padding-right: 42px;" />
+                <button type="button" class="password-toggle-btn" data-target="admin-old-password" aria-label="Lihat password lama" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #4a5568; cursor: pointer; font-size: 1rem;">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="admin-new-password">Password Baru</label>
+              <div style="position: relative;">
+                <input id="admin-new-password" type="password" placeholder="Masukkan password baru" required style="padding-right: 42px;" />
+                <button type="button" class="password-toggle-btn" data-target="admin-new-password" aria-label="Lihat password baru" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #4a5568; cursor: pointer; font-size: 1rem;">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="admin-confirm-password">Konfirmasi Password Baru</label>
+              <div style="position: relative;">
+                <input id="admin-confirm-password" type="password" placeholder="Ulangi password baru" required style="padding-right: 42px;" />
+                <button type="button" class="password-toggle-btn" data-target="admin-confirm-password" aria-label="Lihat konfirmasi password" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #4a5568; cursor: pointer; font-size: 1rem;">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="full" style="display:flex; justify-content:flex-end;">
+              <button type="submit" id="admin-save-password-btn" class="btn btn-primary">
+                <i class="fas fa-save"></i> Simpan Password
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
